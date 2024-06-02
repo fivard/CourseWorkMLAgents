@@ -27,7 +27,7 @@ public class Fish : MonoBehaviour
             randomizedSpeed = fishSpeed * UnityEngine.Random.Range(.5f, 1.5f);
 
             // Pick a random target
-            targetPosition = PenguinArea.ChooseRandomPosition(transform.parent.position, 100f, 260f, 2f, 13f);
+            targetPosition = HumanArea.ChooseRandomPosition(transform.parent.position, 100f, 260f, 2f, 13f);
 
             // Rotate toward the target
             transform.rotation = Quaternion.LookRotation(targetPosition - transform.position, Vector3.up);
