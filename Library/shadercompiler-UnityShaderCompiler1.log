@@ -1,0 +1,13 @@
+Base path: /Applications/Unity/Unity.app/Contents
+Cmd: initializeCompiler
+Cmd: compileComputeKernel
+  api=14 insize=12270 outsize=2537 ok=1
+Cmd: translateComputeKernel
+  api=14 insize=2997 outsize=3405 ok=1
+Cmd: compileComputeKernel
+  error: 1 plat 14 at Tensor.cginc(142): use of potentially uninitialized variable (ReadonlyTensor::SafeGet)
+  api=14 insize=64076 outsize=13645 ok=1
+Cmd: translateComputeKernel
+  api=14 insize=8577 outsize=16249 ok=1
+Cmd: compileSnippet
+  api=14 type=0 insize=1373 outsize=4147 kw=UNITY_PASS_FORWARDBASE DIRECTIONAL SHADOWS_SCREEN LIGHTPROBE_SH _SPECULARHIGHLIGHTS_OFF _GLOSSYREFLECTIONS_OFF pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_COLORSPACE_GAMMA UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
