@@ -166,7 +166,7 @@
      <Compile Include="Assets\ML-Agents\Scripts\Startup.cs" />
      <Compile Include="Assets\ML-Agents\Scripts\UnityAgentsException.cs" />
      <Compile Include="Assets\ML-Agents\Scripts\Utilities.cs" />
-     <Compile Include="Assets\Scripts\Fish.cs" />
+     <Compile Include="Assets\Scripts\Ball.cs" />
      <Compile Include="Assets\Scripts\HumanAcademy.cs" />
      <Compile Include="Assets\Scripts\HumanAgent.cs" />
      <Compile Include="Assets\Scripts\HumanArea.cs" />

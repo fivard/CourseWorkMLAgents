@@ -9,28 +9,28 @@ public class HumanArea : Area
 {
     public HumanAgent humanAgent;
     public GameObject humanBaby;
-    public Fish fishPrefab;
+    public Ball ballPrefab;
     public TextMeshPro cumulativeRewardText;
 
     [HideInInspector]
-    public float fishSpeed = 0f;
+    public float ballSpeed = 0f;
     [HideInInspector]
     public float feedRadius = 1f;
 
-    private List<GameObject> fishList;
+    private List<GameObject> ballList;
 
     public override void ResetArea()
     {
-        RemoveAllFish();
+        RemoveAllBall();
         PlaceHuman();
         PlaceBaby();
-        SpawnFish(4, fishSpeed);
+        SpawnBall(4, ballSpeed);
     }
 
-    public void RemoveSpecificFish(GameObject fishObject)
+    public void RemoveSpecificBall(GameObject ballObject)
     {
-        fishList.Remove(fishObject);
-        Destroy(fishObject);
+        ballList.Remove(ballObject);
+        Destroy(ballObject);
     }
 
     public static Vector3 ChooseRandomPosition(Vector3 center, float minAngle, float maxAngle, float minRadius, float maxRadius)
@@ -45,20 +45,20 @@ public class HumanArea : Area
         return center + Quaternion.Euler(0f, UnityEngine.Random.Range(minAngle, maxAngle), 0f) * Vector3.forward * radius;
     }
 
-    private void RemoveAllFish()
+    private void RemoveAllBall()
     {
-        if (fishList != null)
+        if (ballList != null)
         {
-            for (int i = 0; i < fishList.Count; i++)
+            for (int i = 0; i < ballList.Count; i++)
             {
-                if (fishList[i] != null)
+                if (ballList[i] != null)
                 {
-                    Destroy(fishList[i]);
+                    Destroy(ballList[i]);
                 }
             }
         }
 
-        fishList = new List<GameObject>();
+        ballList = new List<GameObject>();
     }
 
     private void PlaceHuman()
@@ -68,25 +68,24 @@ public class HumanArea : Area
 
     private void PlaceBaby()
     {
-        humanBaby.transform.position = ChooseRandomPosition(transform.position, -45f, 45f, 4f, 9f) + Vector3.up * .5f;
+        humanBaby.transform.position = ChooseRandomPosition(transform.position, -45f, 45f, 3f, 9f) + Vector3.up * .5f;
     }
 
-    private void SpawnFish(int count, float fishSpeed)
+    private void SpawnBall(int count, float ballSpeed)
     {
         for (int i = 0; i < count; i++)
         {
-            GameObject fishObject = Instantiate<GameObject>(fishPrefab.gameObject);
-            fishObject.transform.position = ChooseRandomPosition(transform.position, 100f, 260f, 2f, 13f) + Vector3.up * .5f;
-            fishObject.transform.rotation = Quaternion.Euler(0f, UnityEngine.Random.Range(0f, 360f), 0f);
-            fishObject.transform.parent = transform;
-            fishList.Add(fishObject);
-            fishObject.GetComponent<Fish>().fishSpeed = fishSpeed;
+            GameObject ballObject = Instantiate<GameObject>(ballPrefab.gameObject);
+            ballObject.transform.position = ChooseRandomPosition(transform.position, 100f, 260f, 2f, 13f) + Vector3.up * .5f;
+            ballObject.transform.rotation = Quaternion.Euler(0f, UnityEngine.Random.Range(0f, 360f), 0f);
+            ballObject.transform.parent = transform;
+            ballList.Add(ballObject);
+            ballObject.GetComponent<Ball>().ballSpeed = ballSpeed;
         }
     }
 
     private void Update()
     {
         cumulativeRewardText.text = humanAgent.GetCumulativeReward().ToString("0.00");
-        Debug.Log(humanAgent.GetCumulativeReward());
     }
 }

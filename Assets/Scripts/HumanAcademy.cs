@@ -9,16 +9,14 @@ public class HumanAcademy : Academy
 
     public override void AcademyReset()
     {
-        // Get the human areas
         if (humanAreas == null)
         {
             humanAreas = FindObjectsOfType<HumanArea>();
         }
 
-        // Set up areas
         foreach (HumanArea humanArea in humanAreas)
         {
-            humanArea.fishSpeed = resetParameters["fish_speed"];
+            humanArea.ballSpeed = resetParameters["ball_speed"];
             humanArea.feedRadius = resetParameters["feed_radius"];
             humanArea.ResetArea();
         }

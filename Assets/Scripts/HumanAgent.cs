@@ -7,8 +7,6 @@ using System;
 public class HumanAgent : Agent
 {
     public GameObject heartPrefab;
-    public GameObject regurgitatedFishPrefab;
-
     private HumanArea humanArea;
     private Animator animator;
     private RayPerception3D rayPerception;
@@ -58,13 +56,12 @@ public class HumanAgent : Agent
         AddVectorObs((baby.transform.position - transform.position).normalized);
         AddVectorObs(transform.forward);
         float rayDistance = 20f;
-        // float[] rayAngles = { 0f, 10f, 20f, 30f, 40f, 50f, 60f, 70f, 80f, 90f, 120f, 150f, 180f, 210f, 240f, 270f, 300f, 330f, 360f};
         float[] rayAngles = new float[36];
         for (int i = 0; i < 36; i++)
         {
             rayAngles[i] = 10f + 10f * i;
         }
-        string[] detectableObjects = { "baby", "fish", "wall" };
+        string[] detectableObjects = { "baby", "ball", "wall" };
         AddVectorObs(rayPerception.Perceive(rayDistance, rayAngles, detectableObjects, 0f, 0f));
     }
 
@@ -80,45 +77,41 @@ public class HumanAgent : Agent
     {
         if (Vector3.Distance(transform.position, baby.transform.position) < humanArea.feedRadius)
         {
-            RegurgitateFish();
+            RegurgitateBall();
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.CompareTag("fish"))
+        if (collision.transform.CompareTag("ball"))
         {
-            EatFish(collision.gameObject);
+            EatBall(collision.gameObject);
         }
         else if (collision.transform.CompareTag("baby"))
         {
-            RegurgitateFish();
+            RegurgitateBall();
         }
     }
 
-    private void EatFish(GameObject fishObject)
+    private void EatBall(GameObject ballObject)
     {
         if (isFull) return; 
         isFull = true;
 
-        humanArea.RemoveSpecificFish(fishObject);
+        humanArea.RemoveSpecificBall(ballObject);
 
         AddReward(1f);
     }
 
-    private void RegurgitateFish()
+    private void RegurgitateBall()
     {
         if (!isFull) return;
         isFull = false;
 
-        GameObject regurgitatedFish = Instantiate<GameObject>(regurgitatedFishPrefab);
-        regurgitatedFish.transform.parent = transform.parent;
-        regurgitatedFish.transform.position = baby.transform.position;
-        Destroy(regurgitatedFish, 4f);
 
         GameObject heart = Instantiate<GameObject>(heartPrefab);
         heart.transform.parent = transform.parent;
-        heart.transform.position = baby.transform.position + Vector3.up;
+        heart.transform.position = baby.transform.position + Vector3.up*2f;
         Destroy(heart, 4f);
 
         AddReward(1f);

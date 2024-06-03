@@ -21,5 +21,5 @@ MonoBehaviour:
     - Move forward or backward
     - Turn left or right
     vectorActionSpaceType: 0
-  model: {fileID: 0}
+  model: {fileID: 5022602860645237092, guid: 5c894872331c44c0894764136d0ddde5, type: 3}
   inferenceDevice: 0
